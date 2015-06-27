@@ -4,7 +4,7 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
     Config *draw;
-    Gridworld *world = parse_config(draw);
-    draw_world(world, argc, argv);
+    Scene *scene = parse_config(draw);
+    draw_world(scene, argc, argv);
     return 0;
 }
