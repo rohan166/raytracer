@@ -1,20 +1,16 @@
 #include "Point3.h"
-#include "Vector3.h"
+#include <initializer_list>
 
-Point3::Point3(float x, float y, float z): Triplet(x, y, z) {}
-
-Vector3* Point3::operator-(Point3 &other) {
-    return new Vector3(this, other);
+Vector3 Point3::operator-(const Point3& other) const {
+    return Vector3(*this, other);
 }
 
-Point3* Point3::operator+(Vector3 &other) {
-    Point3 *p = new Point3(this);
-    *p += other;
+Point3 Point3::operator+(const Vector3& other) const {
+    Point3 p = *this;
+
+    for(auto i : {0, 1, 2}) {
+        p.coords[i] += other.coords[i];
+    }
+
     return p;
-}
-
-void Point3::operator+=(Vector3 &other) {
-    v[0] += other.magnitude*other.first();
-    v[1] += other.magnitude*other.second();
-    v[2] += other.magnitude*other.third();
 }
