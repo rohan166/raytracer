@@ -5,9 +5,6 @@
 #include <stdio.h>
 #include <string>
 #include "config.h"
-#include "scene.h"
-#include "primitives/primitive.h"
-#include "primitives/sphere.h"
 
 #define NUM_OBJECTS 2
 

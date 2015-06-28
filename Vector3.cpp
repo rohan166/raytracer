@@ -1,34 +1,42 @@
 #include <math.h>
+#include <initializer_list>
+
 #include "Vector3.h"
 
-Vector3::Vector3(float x, float y, float z, float m): Triplet(x, y, z), magnitude(m) {}
+float get_mag(const float* coords) {
+    float sum = 0;
 
-Vector3::Vector3(Triplet &t, float m): Triplet(t), magnitude(m) {}
+    for(auto i : {0, 1, 2}) {
+        sum += coords[i]*coords[i];
+    }
 
-Vector3::Vector3(Point &p1, Point &p2) {
-    v[0] = p2.first() - p1.first();
-    v[1] = p2.second() - p1.second();
-    v[2] = p2.third() - p1.third();
-    magnitude = sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+    return sqrt(sum);
 }
 
-void Vector3::scale(float coefficient) {
-    magnitude *= coefficient;
+Vector3::Vector3(const Point3& p1, const Point3& p2) {
+    auto p = (p1 - p2);
+    for(auto i : {0, 1, 2}) {
+        this->coords[i] = p.coords[i];
+    }
 }
 
-Vector3 Vector3::scaled(float coefficient) {
-    Vector3 *v = new Vector3(this);
-    v->scale(coefficient);;
+Vector3 Vector3::scaled(float coefficient) const {
+    Vector3 v = *this;
+    for(auto i : {0, 1, 2}) {
+      v.coords[i] *= coefficient;
+    }
     return v;
 }
 
-void Vector3::normalize() {
-    magnitude = 1;
-}
+Vector3 Vector3::normalized() const {
+    Vector3 v = *this;
 
-Vector3 Vector3::normalized() {
-    Vector3 *v = new Vector3(this);
-    v->normalize();
+    auto mag = get_mag(v.coords);
+
+    for(auto i : {0, 1, 2}) {
+        v.coords[i] /= mag;
+    }
+
     return v;
 }
 

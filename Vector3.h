@@ -1,20 +1,22 @@
 #ifndef PROJECT_VECTOR3_H
 #define PROJECT_VECTOR3_H
 
-#include "Triplet.h"
+class Point3;
 
-class Vector3 : public Triplet {
-    float magnitude;
+#include "Point3.h"
+
+class Vector3 {
+    friend class Point3;
+    float coords[3];
+
 public:
-    Vector3(float x, float y, float z, float m);
-    Vector3(Triplet &t, float m);
-    Vector3(Point &first, Point &second);
+    Vector3(float x, float y, float z) :
+        coords{x, y, z} {};
 
-    void scale(float coefficient);
-    Vector3 scaled(float coefficient);
+    Vector3(const Point3& p1, const Point3& p2);
 
-    void normalize();
-    Vector3 normalized();
+    Vector3 scaled(float coefficient) const;
+    Vector3 normalized() const;
 };
 
 
