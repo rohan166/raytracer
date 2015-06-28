@@ -5,20 +5,20 @@
 #include "Camera.h"
 #include "Sampler.h"
 #include "Vector3.h"
+#include "Ray.h"
+#include "Intersection.h"
 
 
 class Scene {
 private:
-    static Scene* instance;
     Camera camera;
 
-    Scene() : camera(Camera(Vector3(0, 0, 0))) { }
 
     Sampler sampler;
 
 public:
 
-    static Scene &getInstance();
+    Scene() : camera(Ray(Point3(0, 0, 0), Vector3(0, 0, -1))) { }
 
     Camera &getCamera() {
         return camera;
@@ -28,6 +28,7 @@ public:
         return sampler;
     }
 
+    Intersection* castRay(Ray ray) { return nullptr; }
 };
 
 

@@ -9,8 +9,9 @@ private:
     int x, y;
 public:
     void setColor(const Color &color) {
-        Sample::color = color;
+        this->color = color;
     }
+
 
 public:
     Sample(const Color &color, int x, int y) : color(color), x(x), y(y) { }

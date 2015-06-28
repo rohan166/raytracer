@@ -3,16 +3,18 @@
 #include "Sampler.h"
 #include "Camera.h"
 #include "Sample.h"
+#include "Intersection.h"
+#include "Pixel.h"
 
 using namespace std;
 
 int main(int argc, char* argv[]) {
-    Scene &scene = Scene::getInstance();
+    Scene scene;
     Camera &camera = scene.getCamera();
-    Sampler &sampler = camera.getCampler();
-    for (const Sample &sample: sampler.getSamples()) {
+    Sampler &sampler = scene.getSampler();
+    for (Sample &sample: sampler.getSamples()) {
         Ray ray = camera.getRay(sample);
-        Intersection* intersection = Scene.cast_ray(ray);
+        Intersection* intersection = scene.castRay(ray);
         if (!intersection) sample.setColor(Color(0, 0, 0));
         else sample.setColor(intersection->getColor());
         sampler.resolve(sample);
