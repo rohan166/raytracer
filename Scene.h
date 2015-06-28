@@ -1,12 +1,13 @@
 #ifndef RAYTRACER_SCENE_H
 #define RAYTRACER_SCENE_H
 
+
 #include "Camera.h"
 #include "Sampler.h"
 
 class Scene {
 private:
-    static Scene *instance;
+    static Scene* instance;
     Camera camera;
     Sampler sampler;
 
@@ -14,7 +15,15 @@ private:
 
 public:
 
-    static Scene &get();
+    static Scene &getInstance();
+
+    Camera &getCamera() {
+        return camera;
+    }
+
+    Sampler &getSampler() {
+        return sampler;
+    }
 };
 
 

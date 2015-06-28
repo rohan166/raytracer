@@ -1,22 +1,23 @@
-#ifndef PROJECT_VECTOR3_H
-#define PROJECT_VECTOR3_H
+#ifndef PROJECT_VECTOR2_H
+#define PROJECT_VECTOR2_H
 
-class Point3;
+class Point2;
 
-#include "Point3.h"
+#include "Point2.h"
 
-class Vector3 {
-    friend class Point3;
-    float coords[3];
+class Vector2 {
+    friend class Point2;
+
+    float coords[2];
 
 public:
-    Vector3(float x, float y, float z) :
-        coords{x, y, z} {};
+    Vector2(float x, float y) : coords{x, y} { };
 
-    Vector3(const Point3& p1, const Point3& p2);
+    Vector2(const Point2 &p1, const Point2 &p2);
 
-    Vector3 scaled(float coefficient) const;
-    Vector3 normalized() const;
+    Vector2 scaled(float coefficient) const;
+
+    Vector2 normalized() const;
 };
 
 

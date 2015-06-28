@@ -1,13 +1,11 @@
-//
-// Created by andrew on 6/28/15.
-//
-
 #ifndef RAYTRACER_COLOR_H
 #define RAYTRACER_COLOR_H
 
 
 class Color {
+    unsigned char components[3];
 
+    Color(unsigned char r, unsigned char g, unsigned char b) : components{r, g, b} { };
 };
 
 

@@ -1,11 +1,11 @@
 #include "Scene.h"
-#include "Vector3.h"
+#include "Camera.h"
 
-Scene& Scene::get(){
-    if(!instance) instance = new Scene();
+Scene &Scene::getInstance() {
+    if (!instance) instance = new Scene();
     return *instance;
 }
 
-Scene::Scene(){
-    camera = Camera(Vector3());
+Scene::Scene() {
+    camera = Camera(Ray(Point3(0, 0, 0), Vector3(0, 0, -1)));
 }
