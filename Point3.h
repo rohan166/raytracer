@@ -7,8 +7,8 @@
 class Point3 : public Triplet {
 public:
     Point3 (float x, float y, float z);
-    Vector3 operator-(Point3 other);
-    Point3 operator+(Vector3 other);
+    Vector3 operator-(Point3 &other);
+    Point3 operator+(Vector3 &other);
 };
 
 

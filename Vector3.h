@@ -4,13 +4,17 @@
 #include "Triplet.h"
 
 class Vector3 : public Triplet {
-    double magnitude;
+    float magnitude;
 public:
-    Vector3(float x, float y, float z, double m);
-    Vector3(Triplet t, double m);
+    Vector3(float x, float y, float z, float m);
+    Vector3(Triplet &t, float m);
+    Vector3(Point &first, Point &second);
 
-    void scale(double coefficient);
-    Vector3 scaled(double coefficient);
+    void scale(float coefficient);
+    Vector3 scaled(float coefficient);
+
+    void normalize();
+    Vector3 normalized();
 };
 
 
