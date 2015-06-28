@@ -3,7 +3,7 @@
 
 
 class Triplet {
-    float x, y, z;
+    float v[3];
 private:
 public:
 };

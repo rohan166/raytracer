@@ -6,8 +6,8 @@
 #include "Point3.h"
 
 class Ray {
-    Point3 base;
-    Vector3 vec;
+    Point3 origin;
+    Vector3 direction;
 };
 
 
