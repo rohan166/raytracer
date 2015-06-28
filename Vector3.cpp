@@ -31,3 +31,4 @@ Vector3 Vector3::normalized() {
     v->normalize();
     return v;
 }
+
