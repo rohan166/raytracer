@@ -3,18 +3,16 @@
 
 #include "Camera.h"
 #include "Sampler.h"
+#include "Vector3.h"
+
 
 class Scene {
 private:
-    static Scene *instance;
     Camera camera;
     Sampler sampler;
 
-    Scene();
-
 public:
-
-    static Scene &get();
+    Scene() : camera(Camera(Vector3(0, 0, 0))) {}
 };
 
 
