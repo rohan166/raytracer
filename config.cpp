@@ -1,6 +1,6 @@
-//
-// Created by rray on 6/27/15.
-//
+/* Created by rray on 6/27/15.
+ * Parse the config file in the project's base directory and generate a description of the world in memory.
+ */
 
 #include <stdio.h>
 #include <string>
