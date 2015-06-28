@@ -5,12 +5,12 @@ CFLAGS=-c -Wall
 LDFLAGS=
 SOURCES=*.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
-EXECUTABLE=raytracer
+	EXECUTABLE=raytracer
 
 all: $(SOURCES) $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS)
-    $(CC) $(LDFLAGS) $(OBJECTS) -o $@
+	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
 
 .cpp.o:
-    $(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< -o $@
