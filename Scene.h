@@ -4,14 +4,17 @@
 
 #include "Camera.h"
 #include "Sampler.h"
+#include "Vector3.h"
+
 
 class Scene {
 private:
     static Scene* instance;
     Camera camera;
-    Sampler sampler;
 
-    Scene();
+    Scene() : camera(Camera(Vector3(0, 0, 0))) { }
+
+    Sampler sampler;
 
 public:
 
@@ -24,6 +27,7 @@ public:
     Sampler &getSampler() {
         return sampler;
     }
+
 };
 
 

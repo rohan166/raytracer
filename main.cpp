@@ -20,5 +20,4 @@ int main(int argc, char* argv[]) {
     for (const Pixel &pixel: sampler.getPixels()) {
         camera.writePixel(pixel);
     }
-    return 0;
 }
