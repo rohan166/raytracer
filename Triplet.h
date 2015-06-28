@@ -4,8 +4,11 @@
 
 class Triplet {
     float v[3];
-private:
 public:
+    Triplet (float v0, float v1, float v2);
+    float first();
+    float second();
+    float third();
 };
 
 
