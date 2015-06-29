@@ -14,7 +14,9 @@ public:
     Point3(float x, float y, float z) : coords{x, y, z} { }
 
     Vector3 operator-(const Point3& other) const;
+
     Point3  operator+(const Vector3& other) const;
+
     Point3  operator-(const Vector3& other) const;
 };
 

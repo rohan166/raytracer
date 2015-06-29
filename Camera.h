@@ -20,13 +20,13 @@ public:
         double screen_height = screen_width * vpixels / hpixels;
 
         // put the screen 1 unit in front of the camera
-        ray.direction.normalize();
+        ray.d.normalize();
 
         // construct a new vector that's perpendicular to the camera's direction and the up vector
-        right = ray.direction.crossProduct(up).normalized();
+        right = ray.d.crossProduct(up).normalized();
 
         // construct a new vector that's perpendicular to the camera's direction and the right vector
-        down = ray.direction.crossProduct(right);
+        down = ray.d.crossProduct(right);
 
         // now we have an orthonormal basis for screen space!
 
@@ -35,12 +35,12 @@ public:
         down *= screen_height;
 
         // save the top left corner of the screen
-        screen_origin = ray.origin + ray.direction - right / 2 - down / 2;
+        screen_origin = ray.p + ray.d - right / 2 - down / 2;
     }
 
     Ray getRay(Sample sample) {
         Point3 screen_point = screen_origin + down * sample.y + right * sample.x;
-        return Ray(ray.origin, screen_point - screen_origin);
+        return Ray(ray.p, screen_point - screen_origin);
     }
 
     void writePixel(Pixel pixel) { }

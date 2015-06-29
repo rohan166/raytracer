@@ -10,9 +10,6 @@ class Vector3 {
 public:
     float coords[3];
 
-    Vector3(float x, float y, float z) :
-        coords{x, y, z} {};
-
     Vector3(float x, float y, float z) : coords{x, y, z} { };
 
     Vector3() { };
@@ -24,6 +21,9 @@ public:
                        coords[0] * other.coords[1] - coords[1] * other.coords[0]);
     }
 
+    Vector3 operator-() const {
+        return Vector3(-coords[0], -coords[1], -coords[2]);
+    }
 
     Vector3 operator/(double factor) const {
         return Vector3(coords[0] / factor, coords[1] / factor, coords[2] / factor);
