@@ -1,6 +1,7 @@
 #ifndef RAYTRACER_INTERSECTION_H
 #define RAYTRACER_INTERSECTION_H
 
+#include "Color.h"
 
 class Intersection {
     Color color;
