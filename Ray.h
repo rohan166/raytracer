@@ -5,11 +5,11 @@
 #include "Point3.h"
 
 class Ray {
+public:
     Point3 origin;
     Vector3 direction;
 
-public:
-    Ray(const Point3 &origin, const Vector3 &direction) : origin(origin), direction(direction) { }
+    Ray(const Point3& origin, const Vector3& direction) : origin(origin), direction(direction) { }
 };
 
 

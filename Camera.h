@@ -10,9 +10,17 @@
 
 class Camera {
     Ray ray;
+    Vector3 up;
+    Vector3 right;
 
 public:
-    Camera(const Ray &ray) : ray(ray) { }
+    Camera(const Ray& ray_, const Vector3& up_, double hfov) : ray(ray_) {
+        ray.direction.normalize();
+        right = ray.direction.crossProduct(up_);
+        up = right.crossProduct(ray.direction);
+
+        double screen_width = tan(hfov * 90);
+    }
 
     Ray getRay(Sample sample) {
         return Ray(Point3(0, 0, 0), Vector3(0, 0, 0));
