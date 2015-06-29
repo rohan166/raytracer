@@ -8,8 +8,7 @@ public:
     Color color;
     int x, y;
 
-public:
-    Sample(const Color& color, int x, int y) : color(color), x(x), y(y) { }
+    Sample(int x, int y) : x(x), y(y) { }
 };
 
 

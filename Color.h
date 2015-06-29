@@ -5,6 +5,8 @@
 class Color {
     unsigned char components[3];
 public:
+    Color() { }
+
     Color(unsigned char r, unsigned char g, unsigned char b) : components{r, g, b} { };
 };
 

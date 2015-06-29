@@ -10,16 +10,15 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
     Scene scene;
-    Camera &camera = scene.getCamera();
-    Sampler &sampler = scene.getSampler();
-    for (Sample &sample: sampler.getSamples()) {
-        Ray ray = camera.getRay(sample);
-        Intersection* intersection = scene.castRay(ray);
-        if (!intersection) sample.color = Color(0, 0, 0);
-        else sample.color = intersection->getColor();
-        sampler.resolve(sample);
-    }
-    for (const Pixel &pixel: sampler.getPixels()) {
-        camera.writePixel(pixel);
+    Camera& camera = scene.getCamera();
+    for (int y = 0; y < 480; y++) {
+        for (int x = 0; x < 640; x++) {
+            Sample sample(x, y);
+            Ray ray = camera.getRay(sample);
+            Intersection* intersection = scene.castRay(ray);
+            if (!intersection) sample.color = Color(0, 0, 0);
+            else sample.color = intersection->getColor();
+            camera.writePixel(Pixel(x, y, sample.color));
+        }
     }
 }
