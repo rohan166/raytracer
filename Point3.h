@@ -7,8 +7,6 @@ class Vector3;
 
 class Point3 {
 public:
-    friend class Vector3;
-
     float coords[3];
 
     Point3() { }

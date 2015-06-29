@@ -7,10 +7,11 @@ class Point3;
 #include <cmath>
 
 class Vector3 {
-
-
 public:
     float coords[3];
+
+    Vector3(float x, float y, float z) :
+        coords{x, y, z} {};
 
     Vector3(float x, float y, float z) : coords{x, y, z} { };
 
