@@ -6,10 +6,9 @@ class Point3;
 #include "Point3.h"
 
 class Vector3 {
-    friend class Point3;
+public:
     float coords[3];
 
-public:
     Vector3(float x, float y, float z) :
         coords{x, y, z} {};
 
