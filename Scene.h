@@ -12,19 +12,17 @@
 class Scene {
 private:
     Camera camera;
-
-
     Sampler sampler;
 
 public:
 
-    Scene() : camera(Ray(Point3(0, 0, 0), Vector3(0, 0, -1))) { }
+    Scene() : camera(Ray(Point3(0, 0, 0), Vector3(0, 0, -1)), Vector3(0, 1, 0), 90) { }
 
-    Camera &getCamera() {
+    Camera& getCamera() {
         return camera;
     }
 
-    Sampler &getSampler() {
+    Sampler& getSampler() {
         return sampler;
     }
 

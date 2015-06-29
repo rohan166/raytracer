@@ -19,3 +19,5 @@ $(EXECUTABLE): $(OBJECTS)
 clean:
 	rm -f $(OBJECTS)
 	rm -f $(EXECUTABLE)
+
+again: clean all

@@ -27,16 +27,3 @@ Vector3 Vector3::scaled(float coefficient) const {
     }
     return v;
 }
-
-Vector3 Vector3::normalized() const {
-    Vector3 v = *this;
-
-    auto mag = get_mag(v.coords);
-
-    for(auto i : {0, 1, 2}) {
-        v.coords[i] /= mag;
-    }
-
-    return v;
-}
-
