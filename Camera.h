@@ -10,20 +10,37 @@
 
 class Camera {
     Ray ray;
-    Vector3 up;
+    Vector3 down;
     Vector3 right;
+    Point3 screen_origin;
 
 public:
-    Camera(const Ray& ray_, const Vector3& up_, double hfov) : ray(ray_) {
-        ray.direction.normalize();
-        right = ray.direction.crossProduct(up_);
-        up = right.crossProduct(ray.direction);
+    Camera(const Ray& ray_, const Vector3& up, double hfov, int hpixels, int vpixels) : ray(ray_) {
+        double screen_width = tan(hfov / 2 * 90);
+        double screen_height = screen_width * vpixels / hpixels;
 
-        double screen_width = tan(hfov * 90);
+        // put the screen 1 unit in front of the camera
+        ray.direction.normalize();
+
+        // construct a new vector that's perpendicular to the camera's direction and the up vector
+        right = ray.direction.crossProduct(up).normalized();
+
+        // construct a new vector that's perpendicular to the camera's direction and the right vector
+        down = ray.direction.crossProduct(right);
+
+        // now we have an orthonormal basis for screen space!
+
+        // scale the vectors so they are the same size as the screen
+        right *= screen_width;
+        down *= screen_height;
+
+        // save the top left corner of the screen
+        screen_origin = ray.origin + ray.direction - right / 2 - down / 2;
     }
 
     Ray getRay(Sample sample) {
-        return Ray(Point3(0, 0, 0), Vector3(0, 0, 0));
+        Point3 screen_point = screen_origin + down * sample.y + right * sample.x;
+        return Ray(ray.origin, screen_point - screen_origin);
     }
 
     void writePixel(Pixel pixel) { }

@@ -15,8 +15,8 @@ int main(int argc, char* argv[]) {
     for (Sample &sample: sampler.getSamples()) {
         Ray ray = camera.getRay(sample);
         Intersection* intersection = scene.castRay(ray);
-        if (!intersection) sample.setColor(Color(0, 0, 0));
-        else sample.setColor(intersection->getColor());
+        if (!intersection) sample.color = Color(0, 0, 0);
+        else sample.color = intersection->getColor();
         sampler.resolve(sample);
     }
     for (const Pixel &pixel: sampler.getPixels()) {

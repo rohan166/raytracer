@@ -4,17 +4,12 @@
 #include "Color.h"
 
 class Sample {
-private:
+public:
     Color color;
     int x, y;
-public:
-    void setColor(const Color &color) {
-        this->color = color;
-    }
-
 
 public:
-    Sample(const Color &color, int x, int y) : color(color), x(x), y(y) { }
+    Sample(const Color& color, int x, int y) : color(color), x(x), y(y) { }
 };
 
 

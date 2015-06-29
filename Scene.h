@@ -16,7 +16,7 @@ private:
 
 public:
 
-    Scene() : camera(Ray(Point3(0, 0, 0), Vector3(0, 0, -1)), Vector3(0, 1, 0), 90) { }
+    Scene() : camera(Ray(Point3(0, 0, 0), Vector3(0, 0, -1)), Vector3(0, 1, 0), 90, 640, 480) { }
 
     Camera& getCamera() {
         return camera;

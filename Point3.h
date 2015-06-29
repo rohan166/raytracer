@@ -6,15 +6,18 @@ class Vector3;
 #include "Vector3.h"
 
 class Point3 {
+public:
     friend class Vector3;
+
     float coords[3];
 
-public:
-    Point3 (float x, float y, float z) :
-        coords{x, y, z} {}
+    Point3() { }
+
+    Point3(float x, float y, float z) : coords{x, y, z} { }
 
     Vector3 operator-(const Point3& other) const;
     Point3  operator+(const Vector3& other) const;
+    Point3  operator-(const Vector3& other) const;
 };
 
 

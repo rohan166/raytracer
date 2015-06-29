@@ -23,7 +23,21 @@ public:
                        coords[0] * other.coords[1] - coords[1] * other.coords[0]);
     }
 
+
+    Vector3 operator/(double factor) const {
+        return Vector3(coords[0] / factor, coords[1] / factor, coords[2] / factor);
+    }
+
+    Vector3 operator*(double factor) const {
+        return Vector3(coords[0] * factor, coords[1] * factor, coords[2] * factor);
+    }
+
+    Vector3 operator*=(double factor) {
+        return (*this = operator*(factor));
+    }
+
     Vector3 scaled(float coefficient) const;
+    Vector3 scaled(double coefficient) const;
 
     double norm_squared() const {
         return coords[0] * coords[0] + coords[1] * coords[1] + coords[2] * coords[2];
