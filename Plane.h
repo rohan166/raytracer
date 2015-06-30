@@ -1,7 +1,9 @@
 #ifndef RAYTRACER_PLANE_H
 #define RAYTRACER_PLANE_H
 
-#include <Intersection.h>
+#include "Intersection.h"
+#include "Point3.h"
+#include "Ray.h"
 
 class Plane {
 public:
@@ -9,19 +11,19 @@ public:
     Vector3 n; // the normal vector of the plane
     Plane() { }
 
-    Plane(Point3 &p, Vector3 &n) : p(p), n(n) { }
+    Plane(Point3& p, Vector3& n) : p(p), n(n) { }
 
-    Intersection *intersects(const Ray &ray) const {
+    Intersection* intersects(const Ray& ray) const {
         // if the ray is parallel to the plane, it never intersects
-        if(n.dot(ray.d) == 0.0) return nullptr;
+        if (n.dot(ray.d) == 0.0) return nullptr;
 
         // math happens here
-        double t=n.dot(p-ray.p)/n.dot(ray.d);
+        double t = n.dot(p - ray.p) / n.dot(ray.d);
 
         // pending implementation of Intersection constructor
         // normal vector is simply this->n
         // t is as computed above
-        return Intersection;
+        return new Intersection();
     }
 };
 
