@@ -23,6 +23,12 @@ public:
                        coords[0] * other.coords[1] - coords[1] * other.coords[0]);
     }
 
+    Vector3 dot(const Vector3 &other) const {
+        return Vector3(coords[1] * other.coords[2] - coords[2] * other.coords[1],
+                       coords[2] * other.coords[0] - coords[0] * other.coords[2],
+                       coords[0] * other.coords[1] - coords[1] * other.coords[0]);
+    }
+
     Vector3 operator-() const {
         return Vector3(-coords[0], -coords[1], -coords[2]);
     }
