@@ -3,7 +3,7 @@
 
 #include "Vector3.h"
 
-float get_mag(const float* coords) {
+float get_mag(const float *coords) {
     float sum = 0;
 
     for (auto i : {0, 1, 2}) {
@@ -13,7 +13,7 @@ float get_mag(const float* coords) {
     return sqrt(sum);
 }
 
-Vector3::Vector3(const Point3& p1, const Point3& p2) : coords{p2.coords[0] - p1.coords[0], p2.coords[1] - p1.coords[1],
+Vector3::Vector3(const Point3 &p1, const Point3 &p2) : coords{p2.coords[0] - p1.coords[0], p2.coords[1] - p1.coords[1],
                                                               p2.coords[2] - p1.coords[2]} {
 }
 
@@ -23,4 +23,10 @@ Vector3 Vector3::scaled(float coefficient) const {
         v.coords[i] *= coefficient;
     }
     return v;
+}
+
+
+std::ostream &operator<<(std::ostream &out, const Vector3 &vector) {
+    out << "(" << vector.coords[0] << ", " << vector.coords[1] << ", " << vector.coords[2] << ")";
+    return out;
 }
