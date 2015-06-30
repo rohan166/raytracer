@@ -7,6 +7,7 @@
 #include "Pixel.h"
 #include "Vector3.h"
 #include "Sample.h"
+#include <iostream>
 
 class Camera {
     Ray ray;
@@ -15,13 +16,13 @@ class Camera {
     Point3 screen_origin;
 
 public:
-    Camera(const Ray& ray_, const Vector3& up, double hfov, int hpixels, int vpixels) : ray(ray_) {
+    Camera(const Ray &ray_, const Vector3 &up, double hfov, int hpixels, int vpixels) : ray(ray_) {
         double screen_width = tan(hfov / 2 * 90);
         double screen_height = screen_width * vpixels / hpixels;
 
         // put the screen 1 unit in front of the camera
         ray.d.normalize();
-
+        
         // construct a new vector that's perpendicular to the camera's direction and the up vector
         right = ray.d.crossProduct(up).normalized();
 
@@ -40,13 +41,13 @@ public:
 
     Ray getRay(Sample sample) {
         Point3 screen_point = screen_origin + down * sample.y + right * sample.x;
-        return Ray(ray.p, screen_point - screen_origin);
+        return Ray(ray.p, Vector3(ray.p, screen_point));
     }
 
     void writePixel(Pixel pixel) { }
 
 private:
-    Color** pixels;
+    Color **pixels;
 };
 
 

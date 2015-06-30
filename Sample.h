@@ -6,9 +6,9 @@
 class Sample {
 public:
     Color color;
-    int x, y;
+    double x, y;
 
-    Sample(int x, int y) : x(x), y(y) { }
+    Sample(double x, double y) : x(x), y(y) { }
 };
 
 

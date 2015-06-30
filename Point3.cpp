@@ -3,7 +3,7 @@
 #include <iostream>
 
 Vector3 Point3::operator-(const Point3 &other) const {
-    return Vector3(*this, other);
+    return Vector3(other, *this);
 }
 
 Point3 Point3::operator+(const Vector3 &other) const {
