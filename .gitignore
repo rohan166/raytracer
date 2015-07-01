@@ -34,3 +34,4 @@ raytracer
 # Sublime
 *.sublime-workspace
 *.sublime-project
+*.ppm

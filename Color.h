@@ -3,8 +3,9 @@
 
 
 class Color {
-    float components[3];
 public:
+    float components[3];
+
     Color() { }
 
     Color(float r, float g, float b) : components{r, g, b} { };

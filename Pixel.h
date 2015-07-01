@@ -4,11 +4,12 @@
 #include "Color.h"
 
 class Pixel {
+public:
     int x, y;
     Color color;
 
-public:
-    Pixel(int x, int y, const Color &color) : x(x), y(y), color(color) { }
+
+    Pixel(int x, int y, const Color& color) : x(x), y(y), color(color) { }
 };
 
 

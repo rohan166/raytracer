@@ -8,21 +8,23 @@
 #include "Vector3.h"
 #include "Sample.h"
 #include <iostream>
+#include <fstream>
 
 class Camera {
     Ray ray;
     Vector3 down;
     Vector3 right;
     Point3 screen_origin;
+    std::ofstream fs;
 
 public:
-    Camera(const Ray &ray_, const Vector3 &up, double hfov, int hpixels, int vpixels) : ray(ray_) {
+    Camera(const Ray& ray_, const Vector3& up, double hfov, int hpixels, int vpixels) : ray(ray_) {
         double screen_width = tan(hfov / 2 * 90);
         double screen_height = screen_width * vpixels / hpixels;
 
         // put the screen 1 unit in front of the camera
         ray.d.normalize();
-        
+
         // construct a new vector that's perpendicular to the camera's direction and the up vector
         right = ray.d.crossProduct(up).normalized();
 
@@ -37,6 +39,9 @@ public:
 
         // save the top left corner of the screen
         screen_origin = ray.p + ray.d - right / 2 - down / 2;
+
+        fs.open("image.ppm", std::fstream::out);
+        fs << "P6 640 480 256\n";
     }
 
     Ray getRay(Sample sample) {
@@ -44,10 +49,14 @@ public:
         return Ray(ray.p, Vector3(ray.p, screen_point));
     }
 
-    void writePixel(Pixel pixel) { }
+    void writePixel(Pixel pixel) {
+        unsigned char buf[3] = {(unsigned char) pixel.color.components[0], (unsigned char) pixel.color.components[1],
+                                (unsigned char) pixel.color.components[2]};
+        fs.write((char*) buf, 3);
+    }
 
 private:
-    Color **pixels;
+    Color** pixels;
 };
 
 
