@@ -3,16 +3,17 @@
 
 #include "Color.h"
 #include "Ray.h"
+#include "Prop.h"
 #include "Vector3.h"
 
 class Intersection {
 public:
-    Ray &ray;
+    const Ray& ray;
     double t; // ray = origin_point + lambda*t
     Vector3 normal;
-    Color color;
-    Intersection(double t_, Ray& r, Vector3& n, Color &c):
-                ray(r), t(t_), normal(n), color(c) {}
+    const Prop& prop;
+
+    Intersection(double t, const Ray& r, Vector3 n, const Prop& prop) : ray(r), t(t), normal(n), prop(prop) { }
 };
 
 

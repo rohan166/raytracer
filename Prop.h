@@ -1,7 +1,3 @@
-//
-// Created by rray on 6/30/15.
-//
-
 #include "Intersection.h"
 #include "Material.h"
 #include "Color.h"
@@ -11,11 +7,18 @@
 #ifndef RAYTRACER_PRIMITIVE_H
 #define RAYTRACER_PRIMITIVE_H
 
+class Scene;
+
+class Material;
+
+class Intersection;
+
 class Prop {
 public:
-    Material &material;
-    virtual Intersection* intersects(Ray &ray const, Scene &scene const) = 0;
-    virtual Color getReflectedColor(Intersection&) = 0;
+    const Material &material;
+    Prop(const Material& material):material(material){}
+
+    virtual Intersection* intersects(const Ray &ray, const Scene &scene) = 0;
 };
 
 #endif //RAYTRACER_PRIMITIVE_H

@@ -8,17 +8,17 @@
 
 using namespace std;
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
     Scene scene;
-    Camera &camera = scene.getCamera();
+    Camera& camera = scene.getCamera();
     for (int y = 0; y < 480; y++) {
         for (int x = 0; x < 640; x++) {
             Sample sample(((double) x) / 640.0, ((double) y) / 480.0);
             Ray ray = camera.getRay(sample);
             cout << "Tracing " << ray << '\n';
-            Intersection *intersection = scene.castRay(ray);
+            Intersection* intersection = scene.castRay(ray);
             if (!intersection) sample.color = Color(0, 0, 0);
-            else sample.color = intersection->getColor();
+            else sample.color = intersection->prop.material.computeColor(*intersection);
             camera.writePixel(Pixel(x, y, sample.color));
         }
     }

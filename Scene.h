@@ -7,7 +7,9 @@
 #include "Vector3.h"
 #include "Ray.h"
 #include "Intersection.h"
+#include "Prop.h"
 
+class Intersection;
 
 class Scene {
 private:

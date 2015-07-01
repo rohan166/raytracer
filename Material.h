@@ -5,12 +5,14 @@
 #include "Intersection.h"
 #include "Color.h"
 
+class Intersection;
+
 class Material {
 public:
     double reflectivity;
     Color diffuse_color;
 
-    Color computeColor(const Intersection &intersection) const {
+    Color computeColor(const Intersection& intersection) const {
         return Color(1.0, 1.0, 1.0);
     }
 };
