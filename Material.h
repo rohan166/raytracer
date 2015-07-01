@@ -6,10 +6,11 @@
 #include "Color.h"
 
 class Material {
+public:
     double reflectivity;
     Color diffuse_color;
 
-    Color compute_color(Intersection intersection) {
+    Color computeColor(const Intersection &intersection) const {
         return Color(1.0, 1.0, 1.0);
     }
 };
