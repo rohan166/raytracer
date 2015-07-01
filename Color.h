@@ -3,11 +3,11 @@
 
 
 class Color {
-    unsigned char components[3];
+    float components[3];
 public:
     Color() { }
 
-    Color(unsigned char r, unsigned char g, unsigned char b) : components{r, g, b} { };
+    Color(float r, float g, float b) : components{r, g, b} { };
 };
 
 

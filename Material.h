@@ -3,8 +3,8 @@
 
 
 class Material {
-
+    double reflectivity;
+    Color3 diffuse_color;
 };
-
 
 #endif //RAYTRACER_MATERIAL_H
