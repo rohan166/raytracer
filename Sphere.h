@@ -2,61 +2,56 @@
 #define RAYTRACER_SPHERE_H
 
 #include "util.h"
+#include "Intersection.h"
+#include "Prop.h"
+#include "Ray.h"
 
-class Sphere {
-  float coords[3];
-  float radius;
+class Sphere : public Prop{
+    Point3 center;
+    float radius;
 
 public:
     Sphere(float x, float y, float z, float r) :
-        coords{x, y, z}, radius(r)
-        {}
+            center(x, y, z), radius(r) { }
 
-    int intersects(const Ray& ray, float *mul1, float *mul2) const {
+    int intersects(const Ray &ray) const {
         float a = 0;
-        for(int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
             a += SQR(ray.d.coords[i]);
         }
 
         float b = 0;
-        for(int i = 0; i < 3; i++) {
-            b += ray.d.coords[i]*(ray.p.coords[i] - coords[i]);
+        for (int i = 0; i < 3; i++) {
+            b += ray.d.coords[i] * (ray.p.coords[i] - center.coords[i]);
         }
         b *= 2;
 
         float c = 0;
-        for(int i = 0; i < 3; i++) {
-            c += SQR(coords[i]);
+        for (int i = 0; i < 3; i++) {
+            c += SQR(center.coords[i]);
             c += SQR(ray.p.coords[i]);
-            c -= 2*coords[i]*ray.p.coords[i];
+            c -= 2 * center.coords[i] * ray.p.coords[i];
         }
         c -= SQR(radius);
 
-        const float bb4ac = SQR(b) - (4.0*a*c);
+        const float bb4ac = SQR(b) - (4.0 * a * c);
 
-        if(bb4ac < 0) {
-            return 0;
-        }
-        if(bb4ac < EPS) {
-            if(mul1) {
-                *mul1 = -b / (2 * a);
+        if (bb4ac > EPS) {
+            const float pm = sqrt(bb4ac);
+            const float a2 = 2 * a;
+            const float t = MIN((-b + pm) / a2, (-b - pm) / a2);
+            if (t >= 0) {
+                Point3 p(ray.p.coords[0] + ray.d.coords[0] * t,
+                         ray.p.coords[1] + ray.d.coords[1] * t,
+                         ray.p.coords[2] + ray.d.coords[2] * t);
+                Vector3 n(p.coords[0] - center.coords[0],
+                          p.coords[1] - center.coords[1],
+                          p.coords[2] - center.coords[2]);
+                // Change this once we have the Material definition
+                return new Intersection(t, ray, n, Color('z', 'z', 'z'));
             }
-
-            return 1;
         }
-        else {
-            if(mul1 || mul2) {
-                const float pm = sqrt(bb4ac);
-                const float a2 = 2*a;
-                if(mul1) {
-                    *mul1 = (-b + pm) / a2;
-                }
-                if(mul2) {
-                    *mul2 = (-b - pm) / a2;
-                }
-            }
-            return 2;
-        }
+        return 0;
     }
 };
 
