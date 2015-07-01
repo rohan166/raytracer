@@ -11,8 +11,11 @@ class Sphere : public Prop{
     float radius;
 
 public:
-    Sphere(float x, float y, float z, float r) :
-            center(x, y, z), radius(r) { }
+    Sphere(float x, float y, float z, float r, Material &m) :
+            center(x, y, z), radius(r), Prop(m) {}
+
+    Sphere(Point3 &p, float r, Material m):
+            center(p), radius(r), material(m) {}
 
     int intersects(const Ray &ray) const {
         float a = 0;
@@ -48,7 +51,7 @@ public:
                           p.coords[1] - center.coords[1],
                           p.coords[2] - center.coords[2]);
                 // Change this once we have the Material definition
-                return new Intersection(t, ray, n, Color('z', 'z', 'z'));
+                return new Intersection(t, ray, n, material.diffuse_color);
             }
         }
         return 0;

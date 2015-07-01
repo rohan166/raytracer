@@ -3,6 +3,7 @@
 //
 
 #include "Intersection.h"
+#include "Material.h"
 #include "Color.h"
 #include "Scene.h"
 #include "Ray.h"
@@ -12,6 +13,7 @@
 
 class Prop {
 public:
+    Material &material;
     virtual Intersection* intersects(Ray &ray const, Scene &scene const) = 0;
     virtual Color getReflectedColor(Intersection&) = 0;
 };
