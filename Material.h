@@ -4,6 +4,9 @@
 
 #include "Intersection.h"
 #include "Color.h"
+#include "Scene.h"
+
+class Scene;
 
 class Intersection;
 
@@ -12,9 +15,7 @@ public:
     double reflectivity;
     Color diffuse_color;
 
-    Color computeColor(const Intersection& intersection) const {
-        return Color(1.0, 1.0, 1.0);
-    }
+    Color computeColor(const Intersection& intersection, const Scene& scene) const;
 };
 
 #endif //RAYTRACER_MATERIAL_H

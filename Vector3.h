@@ -35,6 +35,11 @@ public:
         return Vector3(coords[0] / factor, coords[1] / factor, coords[2] / factor);
     }
 
+    Vector3 operator+(const Vector3& other) const {
+        return Vector3(coords[0] + other.coords[0], coords[1] + other.coords[1], coords[2] + other.coords[2]);
+    }
+
+
     Vector3 operator*(double factor) const {
         return Vector3(coords[0] * factor, coords[1] * factor, coords[2] * factor);
     }

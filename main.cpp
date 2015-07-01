@@ -18,7 +18,7 @@ int main(int argc, char* argv[]) {
             cout << "Tracing " << ray << '\n';
             Intersection* intersection = scene.castRay(ray);
             if (!intersection) sample.color = Color(0, 0, 0);
-            else sample.color = intersection->prop.material.computeColor(*intersection);
+            else sample.color = intersection->prop.material.computeColor(*intersection, scene);
             camera.writePixel(Pixel(x, y, sample.color));
         }
     }
