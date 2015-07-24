@@ -30,10 +30,10 @@ Vector3 Vector3::operator+(const Point3 &other) const {
 
 // It's like adding the negative of the vector to the point
 Vector3 Vector3::operator-(const Point3 &other) const {
-    return *this + (-other);
+    return *this - other;
 }
 
-std::ostream& operator<<(std::ostream &out, const Vector3 &vector) {
+std::ostream &operator<<(std::ostream &out, const Vector3 &vector) {
     out << "<" << vector.coords[0] << ", " << vector.coords[1] << ", " << vector.coords[2] << ">";
     return out;
 }
