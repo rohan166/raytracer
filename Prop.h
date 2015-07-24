@@ -16,9 +16,10 @@ class Intersection;
 class Prop {
 public:
     const Material &material;
-    Prop(const Material& m) : material(m){}
 
-    virtual Intersection* intersects(const Ray &ray, const Scene &scene) = 0;
+    Prop(const Material &m) : material(m) { }
+
+    virtual Intersection *intersects(const Ray &ray, const Scene &scene) = 0;
 };
 
 #endif //RAYTRACER_PRIMITIVE_H

@@ -13,7 +13,7 @@ class Sphere : public Prop {
 public:
     Sphere(float x, float y, float z, float r, Material& m) : center(x, y, z), radius(r), Prop(m) { }
 
-    Sphere(Point3& p, float r, Material m) : center(p), radius(r), material(m), Prop(m) { }
+    Sphere(Point3& p, float r, Material m) : center(p), radius(r), Prop(m) { }
 
     int intersects(const Ray& ray) const {
         /*

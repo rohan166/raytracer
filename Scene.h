@@ -25,7 +25,7 @@ private:
     };
 
     vector<Light> lightList;
-    vector<Prop> propList;
+    vector<Prop*> propList;
     Color backgroundColor;
 
 public:
@@ -35,7 +35,7 @@ public:
         // point, but for now we're just duplicating this
     }
 
-    Scene(vector<Light> lightList_, vector<Prop> propList_, Color backgroundColor_) : camera(
+    Scene(vector<Light> lightList_, vector<Prop*> propList_, Color backgroundColor_) : camera(
             Ray(Point3(0, 0, 0), Vector3(0, 0, -1)), Vector3(0, 1, 0), 90, 640, 480),
                                                                                       lightList(lightList_),
                                                                                       propList(propList_),

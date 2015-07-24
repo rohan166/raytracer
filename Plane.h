@@ -11,9 +11,10 @@ public:
     Point3 p;  // any point on the plane
     Vector3 n; // the normal vector of the plane
 
-    Plane(Material& material, Point3& p, Vector3& n) : Prop(material), p(p), n(n) { }
+    Plane(const Material& material, const Point3& p, const Vector3& n) : Prop(material), p(p), n(n) { }
 
     Intersection* intersects(const Ray& ray, const Scene& scene) const {
+
         // if the ray is parallel to the plane, it never intersects
         if (n.dot(ray.d) == 0.0) return nullptr;
 
