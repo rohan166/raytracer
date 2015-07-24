@@ -44,8 +44,8 @@ public:
 
     }
 
-    vector<Light>::const_iterator getAllLightSources() const {
-        return lightList.begin();
+    vector<Light> getAllLightSources() const {
+        return lightList;
     }
 
     Camera &getCamera() {

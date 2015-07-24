@@ -11,6 +11,7 @@ public:
     const Ray& ray;
     double t; // ray = origin_point + lambda*t
     Vector3 normal;
+    Point3 location;
     const Prop& prop;
 
     Intersection(double t, const Ray& r, Vector3 n, const Prop& prop) : ray(r), t(t), normal(n), prop(prop) { }
