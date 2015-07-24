@@ -1,7 +1,7 @@
 #ifndef RAYTRACER_RECTANGLE_H
 #define RAYTRACER_RECTANGLE_H
 
-#include "Plane.h";
+#include "Plane.h"
 
 class Rectangle: public Plane {
 

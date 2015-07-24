@@ -2,10 +2,12 @@
 #include <initializer_list>
 #include <iostream>
 
+// We get a vector when two points are subtracted
 Vector3 Point3::operator-(const Point3 &other) const {
     return Vector3(other, *this);
 }
 
+// We get another point if we add a vector to a point
 Point3 Point3::operator+(const Vector3 &other) const {
     Point3 p = *this;
 
@@ -16,6 +18,7 @@ Point3 Point3::operator+(const Vector3 &other) const {
     return p;
 }
 
+// It's like adding the negative of the vector to the point
 Point3 Point3::operator-(const Vector3 &other) const {
     return *this + (-other);
 }
