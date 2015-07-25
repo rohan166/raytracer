@@ -1,6 +1,6 @@
 # Makefile for the raytracer
 
-CC=clang++
+CC=g++
 CFLAGS=-c -Wall -std=c++11 -ggdb
 LDFLAGS=
 SOURCES=$(wildcard *.cpp)
