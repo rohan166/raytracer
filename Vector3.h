@@ -56,6 +56,15 @@ public:
 
     Vector3 scaled(double coefficient) const;
 
+    bool isParallel(Vector3 &other) {
+        float mag = norm(), other_mag = other.norm();
+        if ((!mag && other_mag) || (mag && !other_mag))
+            return false;
+        return coords[0]/mag == other.coords[0]/other_mag &&
+               coords[1]/mag == other.coords[1]/other_mag &&
+               coords[2]/mag == other.coords[2]/other_mag;
+    }
+
     double norm_squared() const {
         return coords[0] * coords[0] + coords[1] * coords[1] + coords[2] * coords[2];
     };

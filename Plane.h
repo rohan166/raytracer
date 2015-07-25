@@ -11,10 +11,11 @@ public:
     Point3 p;  // any point on the plane
     Vector3 n; // the normal vector of the plane
 
-    Plane(const Material& material, const Point3& p, const Vector3& n) : Prop(material), p(p), n(n) { }
+    // Vector3 n should be an object but it wasn't clear how to
+    // construct a normal in the member initialization list in Triangle's constructor
+    Plane(Material& material, Point3& p, Vector3 n) : Prop(material), p(p), n(n) { }
 
-    Intersection* intersects(const Ray& ray, const Scene& scene) const {
-
+    virtual Intersection* intersects(const Ray& ray, const Scene& scene) const {
         // if the ray is parallel to the plane, it never intersects
         if (n.dot(ray.d) == 0.0) return nullptr;
 

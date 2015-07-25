@@ -15,7 +15,7 @@ public:
 
     Sphere(Point3& p, float r, Material m) : center(p), radius(r), Prop(m) { }
 
-    int intersects(const Ray& ray) const {
+    Intersection *intersects(const Ray& ray, const Scene &scene) const {
         /*
          * let's say sphere center is c0, c1, c2 with radius r
          * let's also say that ray origin is o0, o1, o2, and direction is d0, d1, d2
