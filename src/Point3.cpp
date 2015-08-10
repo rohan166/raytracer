@@ -1,6 +1,7 @@
 #include "Point3.h"
 #include <initializer_list>
 #include <iostream>
+#include "util.h"
 
 // We get a vector when two points are subtracted
 Vector3 Point3::operator-(const Point3 &other) const {
@@ -21,6 +22,12 @@ Point3 Point3::operator+(const Vector3 &other) const {
 // It's like adding the negative of the vector to the point
 Point3 Point3::operator-(const Vector3 &other) const {
     return *this + (-other);
+}
+
+double Point3::distanceFrom(const Point3 &other) const {
+    return SQR(coords[0]-other.coords[0]) +
+            SQR(coords[1]-other.coords[1]) +
+            SQR(coords[2]-other.coords[2]);
 }
 
 std::ostream &operator<<(std::ostream &out, const Point3 &point) {

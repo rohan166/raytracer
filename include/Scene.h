@@ -37,12 +37,7 @@ public:
 
     Scene(vector<Light> lightList_, vector<Prop*> propList_, Color backgroundColor_) : camera(
             Ray(Point3(0, 0, 0), Vector3(0, 0, -1)), Vector3(0, 1, 0), 90, 640, 480),
-                                                                                      lightList(lightList_),
-                                                                                      propList(propList_),
-                                                                                      backgroundColor(
-                                                                                              backgroundColor_) {
-
-    }
+              lightList(lightList_), propList(propList_), backgroundColor(backgroundColor_) {}
 
     vector<Light> getAllLightSources() const {
         return lightList;
@@ -52,7 +47,7 @@ public:
         return camera;
     }
 
-    Intersection *castRay(Ray ray) { return nullptr; }
+    Intersection *castRay(Ray ray);
 };
 
 

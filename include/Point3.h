@@ -20,6 +20,8 @@ public:
 
     Point3  operator-(const Vector3 &other) const;
 
+    double distanceFrom(const Point3 &other) const;
+
 };
 
 std::ostream &operator<<(std::ostream &out, const Point3 &point);

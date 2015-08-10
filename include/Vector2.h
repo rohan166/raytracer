@@ -17,6 +17,12 @@ public:
 
     Vector2 scaled(float coefficient) const;
 
+    void scale(float coefficient);
+
+    double norm() const;
+
+    double norm_squared() const;
+
     Vector2 normalized() const;
 };
 

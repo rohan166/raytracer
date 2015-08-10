@@ -38,3 +38,12 @@ raytracer
 
 # rray
 wow
+
+# executables
+bin/*
+
+# build files
+build
+
+# produced images
+*.ppm

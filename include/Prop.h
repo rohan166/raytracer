@@ -4,8 +4,8 @@
 #include "Scene.h"
 #include "Ray.h"
 
-#ifndef RAYTRACER_PRIMITIVE_H
-#define RAYTRACER_PRIMITIVE_H
+#ifndef RAYTRACER_PROP_H
+#define RAYTRACER_PROP_H
 
 class Scene;
 
@@ -19,7 +19,7 @@ public:
 
     Prop(const Material &m) : material(m) { }
 
-    virtual Intersection *intersects(const Ray &ray, const Scene &scene) = 0;
+    virtual Intersection *intersects(const Ray &ray) = 0;
 };
 
-#endif //RAYTRACER_PRIMITIVE_H
+#endif //RAYTRACER_PROP_H

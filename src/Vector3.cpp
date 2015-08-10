@@ -17,6 +17,14 @@ Vector3 Vector3::scaled(float coefficient) const {
     return v;
 }
 
+Vector3 Vector3::scaled(double coefficient) const {
+    Vector3 v = *this;
+    for (auto i : {0, 1, 2}) {
+        v.coords[i] *= coefficient;
+    }
+    return v;
+}
+
 // We get another point if we add a point to a vector
 Vector3 Vector3::operator+(const Point3 &other) const {
     Vector3 v = *this;
@@ -31,6 +39,12 @@ Vector3 Vector3::operator+(const Point3 &other) const {
 // It's like adding the negative of the vector to the point
 Vector3 Vector3::operator-(const Point3 &other) const {
     return *this - other;
+}
+
+Vector3 Vector3::operator-(const Vector3 &other) const {
+    return Vector3(coords[0]-other.coords[0],
+                    coords[1]-other.coords[1],
+                    coords[2]-other.coords[2]);
 }
 
 std::ostream &operator<<(std::ostream &out, const Vector3 &vector) {

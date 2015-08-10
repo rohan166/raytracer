@@ -43,6 +43,7 @@ public:
 
     Vector3 operator-(const Point3 &other) const;
 
+    Vector3 operator-(const Vector3 &other) const;
 
     Vector3 operator*(double factor) const {
         return Vector3(coords[0] * factor, coords[1] * factor, coords[2] * factor);

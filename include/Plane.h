@@ -6,6 +6,8 @@
 #include "Prop.h"
 #include "Ray.h"
 
+class Intersection;
+
 class Plane : public Prop {
 public:
     Point3 p;  // any point on the plane
@@ -15,18 +17,7 @@ public:
     // construct a normal in the member initialization list in Triangle's constructor
     Plane(Material& material, Point3& p, Vector3 n) : Prop(material), p(p), n(n) { }
 
-    virtual Intersection* intersects(const Ray& ray, const Scene& scene) const {
-        // if the ray is parallel to the plane, it never intersects
-        if (n.dot(ray.d) == 0.0) return nullptr;
-
-        // math happens here
-        double t = n.dot(p - ray.p) / n.dot(ray.d);
-
-        // pending implementation of Intersection constructor
-        // normal vector is simply this->n
-        // t is as computed above
-        return new Intersection(t, ray, n, *this);
-    }
+    virtual Intersection* intersects(const Ray& ray) const;
 };
 
 

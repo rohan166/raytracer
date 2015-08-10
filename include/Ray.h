@@ -10,6 +10,7 @@ public:
     Vector3 d;
 
     Ray(const Point3 &p_, const Vector3 &d_) : p(p_), d(d_) { }
+    Ray() { }
 };
 
 std::ostream &operator<<(std::ostream &out, const Ray &ray);
