@@ -4,7 +4,7 @@
 
 #include "Sphere.h"
 
-Intersection* Sphere::intersects(const Ray& ray) const {
+Intersection* Sphere::intersects(const Ray& ray) {
     /*
      * let's say sphere center is c0, c1, c2 with radius r
      * let's also say that ray origin is o0, o1, o2, and direction is d0, d1, d2
@@ -40,7 +40,10 @@ Intersection* Sphere::intersects(const Ray& ray) const {
     }
     c -= SQR(radius);
 
-    const float bb4ac = SQR(b) - (4.0 * a * c);
+    const double bb4ac = SQR(b) - (4.0 * a * c);
+
+    cerr << "bb4ac for this ray: " << bb4ac << endl;
+    cerr << "b: " << b << "\tc: " << c << "\ta: " << a << endl;
 
     // can't compare floats with 0 directly so we use an error bound EPS
     if (bb4ac > EPS) {

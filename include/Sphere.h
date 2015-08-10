@@ -15,7 +15,7 @@ public:
 
     Sphere(Point3& p, float r, Material m) : center(p), radius(r), Prop(m) { }
 
-    Intersection* intersects(const Ray& ray) const;
+    Intersection* intersects(const Ray& ray);
 };
 
 #endif //RAYTRACER_SPHERE_H

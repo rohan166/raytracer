@@ -15,6 +15,8 @@ public:
     double reflectivity;
     Color diffuse_color;
 
+    Material(double r, Color &dc) : reflectivity(r), diffuse_color(dc) {}
+
     Color computeColor(const Intersection& intersection, const Scene& scene) const;
 };
 

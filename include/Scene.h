@@ -48,6 +48,16 @@ public:
     }
 
     Intersection *castRay(Ray ray);
+
+    Scene& addProp(Prop *prop) {
+        propList.push_back(prop);
+        return *this;
+    }
+
+    Scene& addLight(Light &light) {
+        lightList.push_back(light);
+        return *this;
+    }
 };
 
 
