@@ -25,7 +25,7 @@ Intersection* Sphere::intersects(const Ray& ray) {
 
     float a = 0, b = 0, c = 0;
     for (int i = 0; i < 3; i++) {
-        a += SQR(ray.d.coords[i]);
+        a += sqr(ray.d.coords[i]);
     }
 
     for (int i = 0; i < 3; i++) {
@@ -34,13 +34,13 @@ Intersection* Sphere::intersects(const Ray& ray) {
     b *= 2;
 
     for (int i = 0; i < 3; i++) {
-        c += SQR(center.coords[i]);
-        c += SQR(ray.p.coords[i]);
+        c += sqr(center.coords[i]);
+        c += sqr(ray.p.coords[i]);
         c -= 2 * center.coords[i] * ray.p.coords[i];
     }
-    c -= SQR(radius);
+    c -= sqr(radius);
 
-    const double bb4ac = SQR(b) - (4.0 * a * c);
+    const double bb4ac = sqr(b) - (4.0 * a * c);
 
     cerr << "bb4ac for this ray: " << bb4ac << endl;
     cerr << "b: " << b << "\tc: " << c << "\ta: " << a << endl;
@@ -49,7 +49,7 @@ Intersection* Sphere::intersects(const Ray& ray) {
     if (bb4ac > EPS) {
         const float pm = sqrt(bb4ac);
         const float a2 = 2 * a;
-        const float t = MIN((-b + pm) / a2, (-b - pm) / a2);
+        const float t = min((-b + pm) / a2, (-b - pm) / a2);
         if (t >= 0) {
             Point3 p(ray.p.coords[0] + ray.d.coords[0] * t, ray.p.coords[1] + ray.d.coords[1] * t,
                      ray.p.coords[2] + ray.d.coords[2] * t);

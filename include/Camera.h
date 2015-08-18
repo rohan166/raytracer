@@ -14,11 +14,11 @@ class Camera {
     Ray ray;
     Vector3 down;
     Vector3 right;
-    Point3 screen_origin;
     std::ofstream fs;
     Color** pixels;
 
 public:
+    Point3 screen_origin;
     // What do all the params mean?
     Camera(const Ray& ray_, const Vector3& up, double hfov, int hpixels, int vpixels);
 

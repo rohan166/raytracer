@@ -11,10 +11,10 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
     Scene scene;
+    Camera& camera = scene.getCamera();
     Color sphereColor(128, 128, 128);
     Material m(0.5, sphereColor);
-    scene.addProp(new Sphere(200, 200, 200, 100, m));
-    Camera& camera = scene.getCamera();
+    scene.addProp(new Sphere(camera.screen_origin.coords[0]+100, camera.screen_origin.coords[1]+100, 100, 100, m));
     int total_c = 0, not_found_c = 0;
     for (int y = 0; y < 480; y++) {
         for (int x = 0; x < 640; x++) {

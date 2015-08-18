@@ -25,9 +25,9 @@ Point3 Point3::operator-(const Vector3 &other) const {
 }
 
 double Point3::distanceFrom(const Point3 &other) const {
-    return SQR(coords[0]-other.coords[0]) +
-            SQR(coords[1]-other.coords[1]) +
-            SQR(coords[2]-other.coords[2]);
+    return sqr(coords[0]-other.coords[0]) +
+            sqr(coords[1]-other.coords[1]) +
+            sqr(coords[2]-other.coords[2]);
 }
 
 std::ostream &operator<<(std::ostream &out, const Point3 &point) {

@@ -20,7 +20,7 @@ Vector2 Vector2::scaled(float coefficient) const {
 }
 
 double Vector2::norm_squared() const {
-    return SQR(coords[0]) + SQR(coords[1]);
+    return sqr(coords[0]) + sqr(coords[1]);
 }
 
 double Vector2::norm() const {
