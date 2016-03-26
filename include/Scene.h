@@ -1,5 +1,4 @@
-#ifndef RAYTRACER_SCENE_H
-#define RAYTRACER_SCENE_H
+#pragma once
 
 #include <vector>
 
@@ -12,53 +11,42 @@
 
 using namespace std;
 
+class Light {
+public:
+    Point3 origin;
+    Color color;
+
+    Light(Point3 origin_, Color color_) : origin(origin_), color(color_) { }
+};
+
 class Intersection;
 
 class Scene {
 private:
-
-    Camera camera;
-
-    struct Light {
-        Point3 origin;
-        Color color;
-    };
-
-    vector<Light> lightList;
-    vector<Prop*> propList;
+    vector<Light *> lightList;
+    vector<Prop *> propList;
+public:
     Color backgroundColor;
 
-public:
+    Scene(Color backgroundColor_) : backgroundColor(backgroundColor_) { }
 
-    Scene() : camera(Ray(Point3(0, 0, 0), Vector3(0, 0, -1)), Vector3(0, 1, 0), 90, 640, 480) {
-        // eventually we'll initialize both the camera and the sampler from the same
-        // point, but for now we're just duplicating this
-    }
-
-    Scene(vector<Light> lightList_, vector<Prop*> propList_, Color backgroundColor_) : camera(
-            Ray(Point3(0, 0, 0), Vector3(0, 0, -1)), Vector3(0, 1, 0), 90, 640, 480),
-              lightList(lightList_), propList(propList_), backgroundColor(backgroundColor_) {}
-
-    vector<Light> getAllLightSources() const {
+    vector<Light *> getAllLightSources() const {
         return lightList;
     }
 
-    Camera &getCamera() {
-        return camera;
-    }
+    Intersection *castRay(Ray ray) const { return castRay(ray, INFINITY); }
 
-    Intersection *castRay(Ray ray);
+    // Ignore intersections past max_t
+    Intersection *castRay(Ray ray, float max_t) const;
 
-    Scene& addProp(Prop *prop) {
+
+    Scene &addProp(Prop *prop) {
         propList.push_back(prop);
         return *this;
     }
 
-    Scene& addLight(Light &light) {
+    Scene &addLight(Light *light) {
         lightList.push_back(light);
         return *this;
     }
 };
-
-
-#endif //RAYTRACER_SCENE_H

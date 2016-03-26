@@ -15,9 +15,9 @@ public:
 
     // Vector3 n should be an object but it wasn't clear how to
     // construct a normal in the member initialization list in Triangle's constructor
-    Plane(Material& material, Point3& p, Vector3 n) : Prop(material), p(p), n(n) { }
+    Plane(const Material &material, Point3 p, Vector3 n) : Prop(material), p(p), n(n.normalized()) { }
 
-    virtual Intersection* intersects(const Ray& ray) const;
+    virtual Intersection *intersects(const Ray &ray) const;
 };
 
 

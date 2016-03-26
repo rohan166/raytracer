@@ -1,11 +1,6 @@
-#include "Intersection.h"
-#include "Material.h"
-#include "Color.h"
-#include "Scene.h"
-#include "Ray.h"
+#pragma once
 
-#ifndef RAYTRACER_PROP_H
-#define RAYTRACER_PROP_H
+#include "Ray.h"
 
 class Scene;
 
@@ -19,7 +14,7 @@ public:
 
     Prop(const Material &m) : material(m) { }
 
-    virtual Intersection *intersects(const Ray &ray) = 0;
+    // Does the ray intersect the prop? This function assumes a normalized ray
+    virtual Intersection *intersects(const Ray &ray) const = 0;
 };
 
-#endif //RAYTRACER_PROP_H

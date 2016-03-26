@@ -13,9 +13,9 @@ public:
 
     Sampler(int hpixels, int vpixels) : hpixels(hpixels), vpixels(vpixels) { }
 
-    virtual std::vector <Sample> getSamples() const;
+    virtual std::vector<Sample> getSamples() const;
 
-    virtual std::vector <Pixel> getPixels() const;
+    virtual std::vector<Pixel> getPixels() const;
 
     void resolve(Sample sample) { }
 

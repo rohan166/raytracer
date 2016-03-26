@@ -1,5 +1,4 @@
-#ifndef RAYTRACER_RAY_H
-#define RAYTRACER_RAY_H
+#pragma once
 
 #include "Vector3.h"
 #include "Point3.h"
@@ -10,9 +9,10 @@ public:
     Vector3 d;
 
     Ray(const Point3 &p_, const Vector3 &d_) : p(p_), d(d_) { }
+
+    Ray(const Point3 &from, const Point3 &to) : p(from), d(to - from) { }
+
     Ray() { }
 };
 
 std::ostream &operator<<(std::ostream &out, const Ray &ray);
-
-#endif //RAYTRACER_RAY_H

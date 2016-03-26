@@ -30,5 +30,5 @@ double Vector2::norm() const {
 Vector2 Vector2::normalized() const {
     Vector2 v = *this;
     double len = v.norm();
-    return Vector2(coords[0]/len, coords[1]/len);
+    return Vector2(coords[0] / len, coords[1] / len);
 }

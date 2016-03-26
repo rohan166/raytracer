@@ -1,6 +1,4 @@
-#ifndef RAYTRACER_MATERIAL_H
-#define RAYTRACER_MATERIAL_H
-
+#pragma once
 
 #include "Intersection.h"
 #include "Color.h"
@@ -12,12 +10,10 @@ class Intersection;
 
 class Material {
 public:
-    double reflectivity;
+    float reflectivity;
     Color diffuse_color;
 
-    Material(double r, Color &dc) : reflectivity(r), diffuse_color(dc) {}
+    Material(float r, Color dc) : reflectivity(r), diffuse_color(dc) { }
 
-    Color computeColor(const Intersection& intersection, const Scene& scene) const;
+    Color computeColor(const Intersection &intersection, const Scene &scene) const;
 };
-
-#endif //RAYTRACER_MATERIAL_H

@@ -10,14 +10,14 @@ class Prop;
 
 class Intersection {
 public:
-    Ray& incidentRay;
+    Ray &incidentRay;
     Ray reflectedRay;
     double t; // ray = origin_point + lambda*t
     Vector3 normal;
     Point3 location;
-    const Prop& prop;
+    const Prop &prop;
 
-    Intersection(double t, Ray r, Vector3 n, const Prop& p);
+    Intersection(double t, Ray r, Vector3 n, const Prop &p);
 };
 
 

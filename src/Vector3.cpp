@@ -6,18 +6,9 @@
 
 Vector3::Vector3(const Point3 &p1, const Point3 &p2) : coords{p2.coords[0] - p1.coords[0],
                                                               p2.coords[1] - p1.coords[1],
-                                                              p2.coords[2] - p1.coords[2]} {
-}
+                                                              p2.coords[2] - p1.coords[2]} { }
 
 Vector3 Vector3::scaled(float coefficient) const {
-    Vector3 v = *this;
-    for (auto i : {0, 1, 2}) {
-        v.coords[i] *= coefficient;
-    }
-    return v;
-}
-
-Vector3 Vector3::scaled(double coefficient) const {
     Vector3 v = *this;
     for (auto i : {0, 1, 2}) {
         v.coords[i] *= coefficient;
@@ -42,9 +33,9 @@ Vector3 Vector3::operator-(const Point3 &other) const {
 }
 
 Vector3 Vector3::operator-(const Vector3 &other) const {
-    return Vector3(coords[0]-other.coords[0],
-                    coords[1]-other.coords[1],
-                    coords[2]-other.coords[2]);
+    return Vector3(coords[0] - other.coords[0],
+                   coords[1] - other.coords[1],
+                   coords[2] - other.coords[2]);
 }
 
 std::ostream &operator<<(std::ostream &out, const Vector3 &vector) {

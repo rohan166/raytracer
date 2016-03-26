@@ -2,6 +2,7 @@
 #define RAYTRACER_PIXEL_H
 
 #include "Color.h"
+#include <iostream>
 
 class Pixel {
 public:
@@ -9,7 +10,7 @@ public:
     Color color;
 
 
-    Pixel(int x, int y, const Color& color) : x(x), y(y), color(color) { }
+    Pixel(int x, int y, const Color &color) : x(x), y(y), color(color * 255.0) { }
 };
 
 
