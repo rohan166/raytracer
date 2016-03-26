@@ -39,6 +39,9 @@ public:
     // Ignore intersections past max_t
     Intersection *castRay(Ray ray, float max_t) const;
 
+    Color traceRay(Ray ray) const;
+
+    Color traceReflection(const Intersection& intersection) const;
 
     Scene &addProp(Prop *prop) {
         propList.push_back(prop);

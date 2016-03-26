@@ -26,7 +26,7 @@ Camera::Camera(const Ray &ray_, const Vector3 &up,
     screen_origin = ray.p + forward - right / 2 - down / 2;
 
     fs.open("image.ppm", std::fstream::out);
-    fs << "P6\n640 480\n255\n";
+    fs << "P6\n" << hpixels << " " << vpixels << "\n255\n";
 }
 
 Ray Camera::getRay(Sample sample) {

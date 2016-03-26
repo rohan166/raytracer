@@ -19,8 +19,13 @@ Color Material::computeColor(const Intersection &intersection, const Scene &scen
         Intersection *occluder = scene.castRay(Ray(intersection.location,
                                                    intersection_to_light),
                                                dist_to_light);
-        if (occluder) continue;
+        if (occluder) {
+            delete occluder;
+            continue;
+        }
         color = color + diffuse_color * cosine * light->color;
     }
+
+    color += scene.traceReflection(intersection) * reflectivity;
     return color;
 }

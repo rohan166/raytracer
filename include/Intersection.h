@@ -13,6 +13,7 @@ public:
     Ray &incidentRay;
     Ray reflectedRay;
     double t; // ray = origin_point + lambda*t
+    int depth = 0;
     Vector3 normal;
     Point3 location;
     const Prop &prop;
