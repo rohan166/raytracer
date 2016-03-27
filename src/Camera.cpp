@@ -2,8 +2,8 @@
 
 #define PI 3.14159265
 
-Camera::Camera(const Ray &ray_, const Vector3 &up,
-               double hfov, int hpixels, int vpixels) : ray(ray_) {
+Camera::Camera(const Ray& ray_, const Vector3& up, double hfov, int hpixels, int vpixels,
+               float gamma_) : ray(ray_), gamma(gamma_) {
     double screen_width = tan(hfov * PI / 90);
     double screen_height = screen_width * vpixels / hpixels;
 
@@ -35,8 +35,8 @@ Ray Camera::getRay(Sample sample) {
 }
 
 void Camera::writePixel(Pixel pixel) {
-    unsigned char buf[3] = {(unsigned char) pixel.color.components[0],
-                            (unsigned char) pixel.color.components[1],
-                            (unsigned char) pixel.color.components[2]};
-    fs.write((char *) buf, 3);
+    unsigned char buf[3] = {(unsigned char) pow(pixel.color.components[0], gamma),
+                            (unsigned char) pow(pixel.color.components[1], gamma),
+                            (unsigned char) pow(pixel.color.components[2], gamma)};
+    fs.write((char*) buf, 3);
 }
