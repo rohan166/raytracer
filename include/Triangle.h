@@ -13,9 +13,9 @@ class Triangle : public Plane {
 public:
     Vector3 a, b;
 
-    Triangle(Point3 &n, Point3 &e, Point3 &f, Material &m);
+    Triangle(Point3 n, Point3 e, Point3 f, Material m);
 
-    Intersection *intersects(const Ray &ray) const;
+    Intersection* intersects(const Ray& ray) const;
 };
 
 

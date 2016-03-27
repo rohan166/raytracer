@@ -1,5 +1,6 @@
 #include <iostream>
 #include <Plane.h>
+#include <Triangle.h>
 #include "Scene.h"
 #include "Sphere.h"
 
@@ -8,6 +9,7 @@ using namespace std;
 int main(int argc, char* argv[]) {
     int hpixels = 500, vpixels = 500;
 
+#pragma omp parallel for
     for (int t = 0; t < 400; t++) {
         char buffer[30]; // make sure it's big enough
         snprintf(buffer, sizeof(buffer), "out/image%03d.ppm", t);
@@ -40,16 +42,20 @@ int main(int argc, char* argv[]) {
         scene.addProp(new Plane(Material(Color(0, 0, 0), 0, 0.8, 0, 0), Point3(0, 0, -6 - 4 * s),
                                 Vector3(0, 0, 1)));
 
+        Material yellow_plastic(Color(1, 1, 0), 0.2, 0, 0, 0);
         // Put a blue and yellow sphere in the box
         scene.addProp(new Sphere(Point3(1.5, 1.5, -2), 1, Material(Color(0, 0, 1), 0.2, 0, 0, 0)));
-        scene.addProp(new Sphere(Point3(-1, 4, -4), 1.5, Material(Color(1, 1, 0), 0.2, 0, 0, 0)));
+        scene.addProp(new Sphere(Point3(-1, 4, -4), 1.5, yellow_plastic));
+
+        scene.addProp(new Triangle(Point3(-1, 1, -3), Point3(-1, 4, -4), Point3(1, 4, -4),
+                                   yellow_plastic));
 
         scene.addProp(
-                new Sphere(Point3(-1, 1, -1), 1, Material(Color(1, 0.5, 0.5), 0.5, 0, 0.5, 0)));
+                new Sphere(Point3(-1, 1, -1), 1, Material(Color(1, 0.5, 0.5), 0.5, 0, 0.5, 1.2)));
 
         // White light in the middle of the room
         scene.addLight(new Light(Point3(0, 5, 2), Color(1, 1, 1) * 0.5));
-        scene.addLight(new Light(Point3(0, 5, 7), Color(1, 1, 1) * 0.5));
+        scene.addLight(new Light(Point3(0, 5, -7), Color(1, 1, 1) * 0.5));
         // Blue light right of center
         scene.addLight(new Light(Point3(2, 5, -3), Color(0.5, 0.5, 1) * 0.5 * s));
 
