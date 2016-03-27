@@ -9,14 +9,8 @@ using namespace std;
 int main(int argc, char* argv[]) {
     int hpixels = 500, vpixels = 500;
 
-#pragma omp parallel for
-    for (int t = 0; t < 400; t++) {
-        char buffer[30]; // make sure it's big enough
-        snprintf(buffer, sizeof(buffer), "out/image%03d.ppm", t);
-        std::ofstream fs;
-        fs.open(buffer, std::fstream::out);
-        fs << "P6\n" << hpixels << " " << vpixels << "\n255\n";
 
+    for (int t = 0; t < 400; t++) {
         float s = pow(sin(3.141592 / 2.0 * (t / 400.0)), 2);
         cout << s << endl;
 
@@ -24,7 +18,7 @@ int main(int argc, char* argv[]) {
                       Vector3(0, 1, 0), 120, hpixels, vpixels, 0.45);
 
         // A dark gray background
-        Scene scene(Color(0.05, 0.05, 0.05));
+        Scene scene(Color(0.01, 0.01, 0.01));
 
         // A gray material
         Material gray(Color(1, 1, 1) * 0.7);
@@ -58,24 +52,25 @@ int main(int argc, char* argv[]) {
         scene.addLight(new Light(Point3(0, 5, -7), Color(1, 1, 1) * 0.5));
         // Blue light right of center
         scene.addLight(new Light(Point3(2, 5, -3), Color(0.5, 0.5, 1) * 0.5 * s));
-
-        for (int y = 0; y < vpixels; y++) {
-            for (int x = 0; x < hpixels; x++) {
-                Color sum;
-                // Take 10 samples inside the pixel
-                int num_samples = 1;
-                for (int i = 0; i < num_samples; i++) {
-                    Sample sample((x + rand_float() - 0.5) / hpixels,
-                                  (y + rand_float() - 0.5) / vpixels);
-                    Ray ray = camera.getRay(sample);
-                    sum += scene.traceRay(ray);
-                }
-                Pixel pixel(x, y, sum * (1.0 / num_samples));
-                unsigned char buf[3] = {(unsigned char) pixel.color.components[0],
-                                        (unsigned char) pixel.color.components[1],
-                                        (unsigned char) pixel.color.components[2]};
-                fs.write((char*) buf, 3);
+        #pragma omp parallel for schedule(dynamic)
+        for (int i = 0; i < hpixels * vpixels; i++) {
+            int x = i % hpixels;
+            int y = i / hpixels;
+            Color sum;
+            // Take 10 samples inside the pixel
+            int num_samples = 1;
+            for (int j = 0; j < num_samples; j++) {
+                Sample sample((x + rand_float() - 0.5) / hpixels,
+                              (y + rand_float() - 0.5) / vpixels);
+                Ray ray = camera.getRay(sample);
+                sum += scene.traceRay(ray);
             }
+            Pixel pixel(x, y, sum * (1.0 / num_samples));
+            camera.writePixel(pixel);
         }
+        char filename[30]; // make sure it's big enough
+        snprintf(filename, sizeof(filename), "out/image%03d.ppm", t);
+
+        camera.writeImage(filename);
     }
 }

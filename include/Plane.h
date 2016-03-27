@@ -1,5 +1,4 @@
-#ifndef RAYTRACER_PLANE_H
-#define RAYTRACER_PLANE_H
+#pragma once
 
 #include "Intersection.h"
 #include "Point3.h"
@@ -17,8 +16,5 @@ public:
     // construct a normal in the member initialization list in Triangle's constructor
     Plane(const Material &material, Point3 p, Vector3 n) : Prop(material), p(p), n(n.normalized()) { }
 
-    virtual Intersection *intersects(const Ray &ray) const;
+    virtual Intersection intersects(const Ray &ray) const;
 };
-
-
-#endif //RAYTRACER_PLANE_H

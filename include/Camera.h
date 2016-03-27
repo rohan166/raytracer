@@ -14,8 +14,9 @@ class Camera {
     Ray ray;
     Vector3 down;
     Vector3 right;
-    std::ofstream fs;
-    Color** pixels;
+
+    Color* film;
+    int hpixels, vpixels;
     float gamma;
 
 public:
@@ -23,10 +24,14 @@ public:
 
     // What do all the params mean?
     Camera(const Ray& ray_, const Vector3& up, double hfov, int hpixels, int vpixels, float gamma);
-
+    ~Camera() {
+        delete film;
+    }
     Ray getRay(Sample sample);
 
     void writePixel(Pixel pixel);
+
+    void writeImage(char* filename);
 };
 
 

@@ -17,6 +17,6 @@ public:
     Prop(Material m) : material(m) { }
 
     // Does the ray intersect the prop? This function assumes a normalized ray
-    virtual Intersection *intersects(const Ray &ray) const = 0;
+    virtual Intersection intersects(const Ray &ray) const = 0;
 };
 

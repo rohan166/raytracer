@@ -34,10 +34,10 @@ public:
         return lightList;
     }
 
-    Intersection *castRay(Ray ray) const { return castRay(ray, INFINITY); }
+    Intersection castRay(Ray ray) const { return castRay(ray, INFINITY); }
 
     // Ignore intersections past max_t
-    Intersection *castRay(Ray ray, float max_t) const;
+    Intersection castRay(Ray ray, float max_t) const;
 
     Color traceRay(Ray ray) const { return traceRay(ray, 0); };
 

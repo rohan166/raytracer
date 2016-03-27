@@ -15,5 +15,5 @@ public:
 
     Sphere(const Point3 p, float r, const Material &m) : center(p), radius(r), Prop(m) { }
 
-    Intersection *intersects(const Ray &ray) const;
+    Intersection intersects(const Ray &ray) const;
 };

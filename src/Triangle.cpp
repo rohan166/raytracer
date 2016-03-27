@@ -8,18 +8,18 @@ Triangle::Triangle(Point3 n, Point3 e, Point3 f, Material m) : a(e - n), b(f - n
     }
 }
 
-Intersection* Triangle::intersects(const Ray& ray) const {
-    Intersection* i = Plane::intersects(ray);
-    if (!i) return nullptr;
+Intersection Triangle::intersects(const Ray& ray) const {
+    Intersection i = Plane::intersects(ray);
+    if (!i.prop) return i;
 
     // is the intersection point inside the a and b edges?
-    if (a.crossProduct(i->location - p).dot(n) < 0) return nullptr;
-    if (b.crossProduct(i->location - p).dot(n) > 0) return nullptr;
+    if (a.crossProduct(i.location - p).dot(n) < 0) return Intersection();
+    if (b.crossProduct(i.location - p).dot(n) > 0) return Intersection();
 
     // is the intersection point inside the edge between A and B?
     Vector3 ab = b - a;
     Point3 A = p + a;
-    if (ab.crossProduct(i->location - A).dot(n) < 0) return nullptr;
+    if (ab.crossProduct(i.location - A).dot(n) < 0) return Intersection();
 
     return i;
 }

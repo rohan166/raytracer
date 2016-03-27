@@ -31,11 +31,8 @@ Color Material::computeColor(const Intersection& intersection, const Scene& scen
 
         // check if there's an unbroken path to the light - ignore any intersections
         // past the light
-        Intersection* occluder = scene.castRay(Ray(intersection.location, L), dist_to_light);
-        if (occluder) {
-            delete occluder;
-            continue;
-        }
+        Intersection occluder = scene.castRay(Ray(intersection.location, L), dist_to_light);
+        if (occluder.prop) continue;
 
         if (kspec != 0) {
             // halfway vector

@@ -10,7 +10,7 @@ public:
     Color color;
 
 
-    Pixel(int x, int y, const Color &color) : x(x), y(y), color(color * 255.0) { }
+    Pixel(int x, int y, const Color &color) : x(x), y(y), color(color) { }
 };
 
 

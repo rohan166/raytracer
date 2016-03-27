@@ -10,6 +10,13 @@ inline float min(float a, float b) {
     return b;
 }
 
+inline float max(float a, float b) {
+    if (a > b)
+        return a;
+    return b;
+}
+
+
 inline float sqr(float a) {
     return a * a;
 }

@@ -1,9 +1,11 @@
 #include "Camera.h"
+#include "util.h"
 
 #define PI 3.14159265
 
 Camera::Camera(const Ray& ray_, const Vector3& up, double hfov, int hpixels, int vpixels,
-               float gamma_) : ray(ray_), gamma(gamma_) {
+               float gamma_) : ray(ray_), gamma(gamma_), hpixels(hpixels), vpixels(vpixels) {
+    film = new Color[hpixels * vpixels];
     double screen_width = tan(hfov * PI / 90);
     double screen_height = screen_width * vpixels / hpixels;
 
@@ -24,9 +26,6 @@ Camera::Camera(const Ray& ray_, const Vector3& up, double hfov, int hpixels, int
 
     // save the top left corner of the screen
     screen_origin = ray.p + forward - right / 2 - down / 2;
-
-    fs.open("image.ppm", std::fstream::out);
-    fs << "P6\n" << hpixels << " " << vpixels << "\n255\n";
 }
 
 Ray Camera::getRay(Sample sample) {
@@ -35,8 +34,29 @@ Ray Camera::getRay(Sample sample) {
 }
 
 void Camera::writePixel(Pixel pixel) {
-    unsigned char buf[3] = {(unsigned char) pow(pixel.color.components[0], gamma),
-                            (unsigned char) pow(pixel.color.components[1], gamma),
-                            (unsigned char) pow(pixel.color.components[2], gamma)};
-    fs.write((char*) buf, 3);
+    film[pixel.y * hpixels + pixel.x] = pixel.color;
+}
+
+void Camera::writeImage(char* filename) {
+    float max_mag = 0;
+    for (int i = 0; i < vpixels * hpixels; i++) {
+        max_mag = max(film[i].components[0], max_mag);
+        max_mag = max(film[i].components[1], max_mag);
+        max_mag = max(film[i].components[2], max_mag);
+    }
+
+    //if (max_mag < 1) max_mag = 1;
+    max_mag = 2;
+
+    std::ofstream fs;
+    fs.open(filename, std::fstream::out);
+    fs << "P6\n" << hpixels << " " << vpixels << "\n255\n";
+
+    for (int i = 0; i < vpixels * hpixels; i++) {
+        for (int j = 0; j < 3; j++) {
+            const unsigned char c = pow(film[i].components[j] / max_mag, gamma) * 255;
+            fs.put(c);
+        }
+    }
+    fs.close();
 }

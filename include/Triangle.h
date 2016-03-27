@@ -15,7 +15,7 @@ public:
 
     Triangle(Point3 n, Point3 e, Point3 f, Material m);
 
-    Intersection* intersects(const Ray& ray) const;
+    Intersection intersects(const Ray& ray) const;
 };
 
 

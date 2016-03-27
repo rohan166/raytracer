@@ -1,6 +1,6 @@
 #include "Sphere.h"
 
-Intersection *Sphere::intersects(const Ray &ray) const {
+Intersection Sphere::intersects(const Ray &ray) const {
     /*
      * math from https://en.wikipedia.org/wiki/Line%E2%80%93sphere_intersection
      */
@@ -21,8 +21,8 @@ Intersection *Sphere::intersects(const Ray &ray) const {
             Point3 p = ray.p + ray.d * t;
             Vector3 n = p - center;
             // Change this once we have the Material definition
-            return new Intersection(t, ray, n.normalized(), *this);
+            return Intersection(t, ray, n.normalized(), this);
         }
     }
-    return 0;
+    return Intersection();
 }
