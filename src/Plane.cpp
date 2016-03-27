@@ -18,9 +18,4 @@ Intersection *Plane::intersects(const Ray &ray) const {
         return new Intersection(t, ray, -n, *this);
     else
         return new Intersection(t, ray, n, *this);
-
-    // pending implementation of Intersection constructor
-    // normal vector is simply this->n
-    // t is as computed above
-
 }

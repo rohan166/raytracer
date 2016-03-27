@@ -25,29 +25,17 @@ Intersection *Scene::castRay(Ray ray, float max_t) const {
     return first_hit;
 }
 
-Color Scene::traceRay(Ray ray) const {
+Color Scene::traceRay(Ray ray, int depth) const {
+    if(depth > 3) return backgroundColor;
     Intersection *intersection = castRay(ray);
     Color result;
     // TODO: hack to clip scene at z=0; need to implement rectangles
     if (!intersection || intersection->location.coords[2] > 0) {
         result = backgroundColor;
     } else {
+        intersection->depth = depth;
         result = intersection->prop.material.computeColor(*intersection, *this);
     }
     delete intersection;
-    return result;
-}
-
-Color Scene::traceReflection(const Intersection &intersection) const {
-    if (intersection.depth > 3) return backgroundColor;
-    Intersection *next_intersection = castRay(intersection.reflectedRay);
-    Color result;
-    if (!next_intersection || next_intersection->location.coords[2] > 0) {
-        result = backgroundColor;
-    } else {
-        next_intersection->depth = intersection.depth + 1;
-        result = next_intersection->prop.material.computeColor(*next_intersection, *this);
-    }
-    delete next_intersection;
     return result;
 }

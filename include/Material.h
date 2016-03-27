@@ -2,7 +2,6 @@
 
 #include "Intersection.h"
 #include "Color.h"
-#include "Scene.h"
 
 class Scene;
 
@@ -10,10 +9,17 @@ class Intersection;
 
 class Material {
 public:
-    float reflectivity;
-    Color diffuse_color;
+    Color base;
+    float kspec = 0;
+    float kref = 0;
+    float ktrans = 0;
+    float ri = 0; // refractive index
 
-    Material(float r, Color dc) : reflectivity(r), diffuse_color(dc) { }
+    Material(Color base_) : base(base_) { }
 
-    Color computeColor(const Intersection &intersection, const Scene &scene) const;
-};
+    Material(Color base_, float kspec_, float kref_, float ktrans_, float ri_) : base(base_), kspec(kspec_),
+                                                                                 kref(kref_), ktrans(ktrans_),
+                                                                                 ri(ri_) { }
+
+    Color computeColor(const Intersection& intersection, const Scene& scene) const;
+};  

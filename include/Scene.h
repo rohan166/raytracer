@@ -39,7 +39,9 @@ public:
     // Ignore intersections past max_t
     Intersection *castRay(Ray ray, float max_t) const;
 
-    Color traceRay(Ray ray) const;
+    Color traceRay(Ray ray) const { return traceRay(ray, 0); };
+
+    Color traceRay(Ray ray, int depth) const;
 
     Color traceReflection(const Intersection& intersection) const;
 
