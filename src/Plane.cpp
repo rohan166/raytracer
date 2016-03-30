@@ -12,9 +12,9 @@ Intersection Plane::intersects(const Ray &ray) const {
     float t = n.dot(p - ray.p) / denom;
     if (t < EPS) return Intersection();
 
-    float cosine = (-n).dot(ray.d);
+    float cosine = n.dot(ray.d);
     // If we hit the "back" side of the plane, negate the normal vector
-    if (cosine < 0)
+    if (cosine > 0)
         return Intersection(t, ray, -n, this);
     else
         return Intersection(t, ray, n, this);

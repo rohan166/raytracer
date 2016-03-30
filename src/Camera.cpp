@@ -6,7 +6,7 @@
 Camera::Camera(const Ray& ray_, const Vector3& up, double hfov, int hpixels, int vpixels,
                float gamma_) : ray(ray_), gamma(gamma_), hpixels(hpixels), vpixels(vpixels) {
     film = new Color[hpixels * vpixels];
-    double screen_width = tan(hfov * PI / 90);
+    double screen_width = 2 * tan(hfov * PI / 360);
     double screen_height = screen_width * vpixels / hpixels;
 
     // put the screen 1 unit in front of the camera
@@ -46,7 +46,6 @@ void Camera::writeImage(char* filename) {
     }
 
     //if (max_mag < 1) max_mag = 1;
-    max_mag = 2;
 
     std::ofstream fs;
     fs.open(filename, std::fstream::out);

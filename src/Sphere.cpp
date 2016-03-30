@@ -1,6 +1,6 @@
 #include "Sphere.h"
 
-Intersection Sphere::intersects(const Ray &ray) const {
+Intersection Sphere::intersects(const Ray& ray) const {
     /*
      * math from https://en.wikipedia.org/wiki/Line%E2%80%93sphere_intersection
      */
@@ -11,8 +11,11 @@ Intersection Sphere::intersects(const Ray &ray) const {
     if (bb4ac >= 0) {
         float pm = sqrt(bb4ac);
         float t = (-b - pm);
-
-        if (t < EPS) t = -b + pm;
+        bool backside = false;
+        if (t < EPS) {
+            backside = true;
+            t = -b + pm;
+        }
 
         if (t >= EPS) {
             // The denominator of the quadratic formula was actually 2,
@@ -20,6 +23,7 @@ Intersection Sphere::intersects(const Ray &ray) const {
             t /= 2;
             Point3 p = ray.p + ray.d * t;
             Vector3 n = p - center;
+            if (backside) n *= -1;
             // Change this once we have the Material definition
             return Intersection(t, ray, n.normalized(), this);
         }

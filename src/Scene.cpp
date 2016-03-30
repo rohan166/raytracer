@@ -1,6 +1,5 @@
 #include <util.h>
 #include "Scene.h"
-#include "Material.h"
 
 
 Intersection Scene::castRay(Ray ray, float max_t) const {
@@ -22,15 +21,19 @@ Intersection Scene::castRay(Ray ray, float max_t) const {
     return first_hit;
 }
 
-Color Scene::traceRay(Ray ray, int depth) const {
-    if(depth > 3) return backgroundColor;
+Color Scene::traceRay(Ray ray, int depth, float ri, float* dist) const {
+    if (depth > 5) return backgroundColor;
     Intersection intersection = castRay(ray);
     Color result;
     // TODO: hack to clip scene at z=0; need to implement rectangles
     if (!intersection.prop || intersection.location.coords[2] > 0) {
         result = backgroundColor;
-    } else {
+        if (dist) *dist = 0;
+    }
+    else {
         intersection.depth = depth;
+        intersection.cur_ri = ri;
+        if (dist) *dist = intersection.t * ray.d.norm();
         result = intersection.prop->material.computeColor(intersection, *this);
     }
     return result;

@@ -1,6 +1,6 @@
 #include "Triangle.h"
 
-Triangle::Triangle(Point3 n, Point3 e, Point3 f, Material m) : a(e - n), b(f - n), Plane(m, n, (e -
+Triangle::Triangle(Point3 n, Point3 e, Point3 f, Material& m) : a(e - n), b(f - n), Plane(m, n, (e -
                                                                                                 n).crossProduct(
         f - n)) {
     if (a.isParallel(b)) {
