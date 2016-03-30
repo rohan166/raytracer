@@ -4,3 +4,4 @@ Intersection::Intersection(double t, Ray r, Vector3 n, const Prop* p) : incident
                                                                         normal(n), prop(p) {
     this->location = incidentRay.p + incidentRay.d * t;
 }
+

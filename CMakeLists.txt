@@ -11,4 +11,9 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 file(GLOB raytracer_src "src/*.cpp")
 
 include_directories(include)
+set(CMAKE_CXX_FLAGS_RELEASE "-Ofast -DNDEBUG")
 add_executable(raytracer ${raytracer_src})
+
+find_package(PNG REQUIRED)
+include_directories(${PNG_INCLUDE_DIR})
+target_link_libraries(raytracer ${PNG_LIBRARY})
