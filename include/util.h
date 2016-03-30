@@ -35,3 +35,8 @@ inline double sqr(double a) {
 inline float rand_float() {
     return (float) rand() / (float) (RAND_MAX);
 }
+
+// Return a random float in [-1, 1]
+inline float rand_offset() {
+    return rand_float() * 2 - 1;
+}

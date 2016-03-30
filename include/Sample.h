@@ -1,7 +1,7 @@
-#ifndef RAYTRACER_SAMPLE_H
-#define RAYTRACER_SAMPLE_H
+#pragma once
 
-#include "Color.h"
+#include <Color.h>
+#include <ostream>
 
 class Sample {
 public:
@@ -11,5 +11,4 @@ public:
     Sample(double x, double y) : x(x), y(y) { }
 };
 
-
-#endif //RAYTRACER_SAMPLE_H
+std::ostream& operator<<(std::ostream& out, const Sample& sample);
